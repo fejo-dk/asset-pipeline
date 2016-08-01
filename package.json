@@ -4,15 +4,17 @@
   "description": "An asset pipeline for ES2015 and SCSS",
   "license": "MIT",
   "bugs": {
-    "url" : "https://github.com/fejo-dk/asset-pipeline/issues"
+    "url": "https://github.com/fejo-dk/asset-pipeline/issues"
   },
   "author": "Lucas Dohmen <lucas.dohmen@innoq.com>",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/fejo-dk/asset-pipeline.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fejo-dk/asset-pipeline.git"
   },
   "bin": {
-    "compile-js": "./bin/compile-js.js"
+    "compile-images": "./bin/compile-images.js",
+    "compile-js": "./bin/compile-js.js",
+    "compile-css": "./bin/compile-css.js"
   },
   "dependencies": {
     "babel-core": "^6.7.6",
@@ -28,7 +30,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
-    "npm-run-all": "^1.7.0",
     "webpack": "^1.12.15"
+  },
+  "devDependencies": {
+    "gulp-util": "^3.0.7"
   }
 }
