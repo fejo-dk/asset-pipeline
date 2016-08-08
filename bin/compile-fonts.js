@@ -12,7 +12,7 @@ const fontsConfig = readConfig('fontsConfig')
 const assetMapLib = require('../lib/asset-map')(cssConfig, imagesConfig, fontsConfig)
 
 gulp.task('compile-fonts', () => gulp
-  .src('app/assets/fonts/*')
+  .src(fontsConfig.sources)
   .pipe(hasher())
   .pipe(rename((path) => renameFilesAccordingToMap(assetMapLib.calculateAssetMap(hasher.hashes), path)))
   .pipe(gulp.dest(fontsConfig.target.directory))
