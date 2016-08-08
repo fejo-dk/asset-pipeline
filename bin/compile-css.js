@@ -11,16 +11,26 @@ const SassString = require('node-sass').types.String
 const readConfig = require('../lib/read-config')
 const cssConfig = readConfig('cssConfig')
 const imagesConfig = readConfig('imagesConfig')
-const assetMapLib = require('../lib/asset-map')(cssConfig, imagesConfig)
+const fontsConfig = readConfig('fontsConfig')
+const assetMapLib = require('../lib/asset-map')(cssConfig, imagesConfig, fontsConfig)
 const path = require('path')
 const renameFilesAccordingToMap = require('../lib/rename-files-according-to-map')
+
+const unifiedAssetMap = (done) => {
+  assetMapLib.readAssetMap('images', (err1, imagesMap) => {
+    assetMapLib.readAssetMap('fonts', (err2, fontsMap) => {
+      const assetMap = Object.assign({}, imagesMap, fontsMap)
+      done(err1 || err2, assetMap)
+    })
+  })
+}
 
 const sassOptions = {
   includePaths: cssConfig.includePaths,
 
   functions: {
     'asset-url($file)': (file, done) => {
-      assetMapLib.readAssetMap('images', (err, assetMap) => {
+      unifiedAssetMap((err, assetMap) => {
         if (err) {
           throw err
         }
