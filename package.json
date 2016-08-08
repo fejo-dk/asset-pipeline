@@ -14,7 +14,8 @@
   "bin": {
     "compile-images": "./bin/compile-images.js",
     "compile-js": "./bin/compile-js.js",
-    "compile-css": "./bin/compile-css.js"
+    "compile-css": "./bin/compile-css.js",
+    "compile-fonts": "./bin/compile-fonts.js"
   },
   "dependencies": {
     "babel-core": "^6.7.6",
