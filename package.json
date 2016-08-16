@@ -31,9 +31,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
     "webpack": "^1.12.15"
-  },
-  "devDependencies": {
-    "gulp-util": "^3.0.7"
   }
 }

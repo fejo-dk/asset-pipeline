@@ -15,6 +15,7 @@ const fontsConfig = readConfig('fontsConfig')
 const assetMapLib = require('../lib/asset-map')(cssConfig, imagesConfig, fontsConfig)
 const path = require('path')
 const renameFilesAccordingToMap = require('../lib/rename-files-according-to-map')
+const gutil = require('gulp-util')
 
 const unifiedAssetMap = (done) => {
   assetMapLib.readAssetMap('images', (err1, imagesMap) => {
@@ -92,7 +93,13 @@ gulp.task('compile-css', () => gulp
 )
 
 gulp.task('watch-css', () => {
-  gulp.watch(cssConfig.sources, ['compile-css'])
+  gutil.log('Start watching for CSS changes')
+
+  gulp
+    .watch(cssConfig.sources, ['compile-css'])
+    .on('change', () => {
+      gutil.log('CSS changed, rebuilding')
+    })
 })
 
 if (process.argv[2] && process.argv[2] === '--watch') {
