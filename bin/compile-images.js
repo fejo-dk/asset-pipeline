@@ -10,6 +10,7 @@ const cssConfig = readConfig('cssConfig')
 const imagesConfig = readConfig('imagesConfig')
 const fontsConfig = readConfig('fontsConfig')
 const assetMapLib = require('../lib/asset-map')(cssConfig, imagesConfig, fontsConfig)
+const gutil = require('gulp-util')
 
 gulp.task('compile-images', () => gulp
   .src(imagesConfig.sources)
@@ -20,7 +21,13 @@ gulp.task('compile-images', () => gulp
 )
 
 gulp.task('watch-images', () => {
-  gulp.watch(imagesConfig.sources, ['compile-images'])
+  gutil.log('Start watching for image changes')
+
+  gulp
+    .watch(imagesConfig.sources, ['compile-images'])
+    .on('change', () => {
+      gutil.log('Images changed, rebuilding')
+    })
 })
 
 if (process.argv[2] && process.argv[2] === '--watch') {
