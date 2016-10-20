@@ -27,6 +27,7 @@ const unifiedAssetMap = (done) => {
 
 const sassOptions = {
   includePaths: cssConfig.includePaths,
+  outputStyle: 'compressed',
 
   functions: {
     'asset-url($file)': (file, done) => {
