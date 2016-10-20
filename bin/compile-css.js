@@ -4,7 +4,6 @@
 const gulp = require('gulp')
 const prefix = require('gulp-autoprefixer')
 const sass = require('gulp-sass')
-const sourcemaps = require('gulp-sourcemaps')
 const rename = require('gulp-rename')
 const hasher = require('gulp-hasher')
 const SassString = require('node-sass').types.String
@@ -28,6 +27,7 @@ const unifiedAssetMap = (done) => {
 
 const sassOptions = {
   includePaths: cssConfig.includePaths,
+  outputStyle: 'compressed',
 
   functions: {
     'asset-url($file)': (file, done) => {
@@ -82,12 +82,10 @@ const calculateRenameMap = (entryPoints, hashes) => {
 
 gulp.task('compile-css', () => gulp
   .src(Object.keys(cssConfig.entryPoints).map((artifact) => cssConfig.entryPoints[artifact]))
-  .pipe(sourcemaps.init())
   .pipe(sass(sassOptions).on('error', sass.logError))
   .pipe(prefix(cssConfig.prefixes))
   .pipe(hasher())
   .pipe(rename((p) => renameFilesAccordingToMap(calculateRenameMap(cssConfig.entryPoints, hasher.hashes), p)))
-  .pipe(sourcemaps.write())
   .pipe(gulp.dest(cssConfig.target.directory))
   .on('end', () => assetMapLib.writeAssetMap(assetMapLib.addPathToAssetMap('stylesheets', calculateAssetMap(cssConfig.entryPoints, hasher.hashes)), 'stylesheets'))
 )

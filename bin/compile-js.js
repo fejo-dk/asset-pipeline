@@ -25,6 +25,9 @@ const compiler = webpack({
     path: path.join('.', jsConfig.target.directory),
     filename: '[name]-[hash].js'
   },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin()
+  ],
   resolve: {
     root: jsConfig.includePaths.map((p) => path.resolve(p)),
     alias: jsConfig.alias
