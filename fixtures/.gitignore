@@ -1,0 +1,3 @@
+build/assets/
+build/manifests/javascript.json
+node_modules/.cache

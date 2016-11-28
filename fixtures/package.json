@@ -1,0 +1,28 @@
+{
+  "name": "an-example-project",
+  "version": "1.0.0",
+  "description": "This is an usage example",
+  "main": "index.js",
+  "author": "Lucas Dohmen <lucas@dohmen.io> (https://lucas.dohmen.io)",
+  "license": "MIT",
+  "jsConfig": {
+    "entryPoints": {
+      "sandbox": "./javascripts/main.js"
+    },
+    "target": {
+      "directory": "build/assets/javascripts"
+    },
+    "includePaths": [
+      "node_modules",
+      "javascripts"
+    ],
+    "manifest": "build/manifests/javascript.json",
+    "baseUrl": "/assets",
+    "alias": {
+      "jquery": "jquery/src/jquery"
+    }
+  },
+  "dependencies": {
+    "identity-function": "^1.0.0"
+  }
+}
