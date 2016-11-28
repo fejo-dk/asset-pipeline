@@ -3,6 +3,9 @@
   "version": "0.4.1",
   "description": "An asset pipeline for ES2015 and SCSS",
   "license": "MIT",
+  "scripts": {
+    "test": "node test.js && eslint test.js bin/*js lib/*js"
+  },
   "bugs": {
     "url": "https://github.com/fejo-dk/asset-pipeline/issues"
   },
@@ -32,5 +35,8 @@
     "gulp-sass": "^2.2.0",
     "gulp-util": "^3.0.7",
     "webpack": "^1.12.15"
+  },
+  "devDependencies": {
+    "tape": "^4.6.3"
   }
 }
