@@ -34,6 +34,7 @@ const compiler = webpack({
     path: path.join('.', jsConfig.target.directory),
     filename: '[name]-[hash].js'
   },
+  externals: jsConfig.externals || {},
   plugins: plugins,
   resolve: {
     root: jsConfig.includePaths.map((p) => path.resolve(p)),
