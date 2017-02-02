@@ -7,6 +7,9 @@ const webpack = require('webpack')
 const buildUrl = require('../lib/build-url')
 const readConfig = require('../lib/read-config')
 
+const watchMode = process.argv.includes('--watch')
+const pollMode = process.argv.includes('--poll')
+
 // TODO: Unify with the calculateAssetMap function
 const calculateAssetMap = (assets) => {
   return assets.reduce((assetMap, asset) => {
@@ -19,15 +22,20 @@ const calculateAssetMap = (assets) => {
 const jsConfig = readConfig('jsConfig')
 const baseUrl = url.parse(jsConfig.baseUrl)
 
+const plugins = []
+
+if (!watchMode) {
+  plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
+
 const compiler = webpack({
   entry: jsConfig.entryPoints,
   output: {
     path: path.join('.', jsConfig.target.directory),
     filename: '[name]-[hash].js'
   },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin()
-  ],
+  externals: jsConfig.externals || {},
+  plugins: plugins,
   resolve: {
     root: jsConfig.includePaths.map((p) => path.resolve(p)),
     alias: jsConfig.alias
@@ -59,11 +67,11 @@ const done = (err, stats) => {
     JSON.stringify(calculateAssetMap(assets)))
 }
 
-if (process.argv[2] && process.argv[2] === '--watch') {
+if (watchMode) {
   compiler.watch({
-    aggregateTimeout: 300
+    aggregateTimeout: 300,
+    poll: pollMode
   }, done)
 } else {
   compiler.run(done)
 }
-
