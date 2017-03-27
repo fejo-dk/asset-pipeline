@@ -31,7 +31,7 @@ gulp.task('watch-images', () => {
 })
 
 if (process.argv[2] && process.argv[2] === '--watch') {
-  gulp.start('watch-images')
+  gulp.start([ 'compile-images', 'watch-images' ])
 } else {
   gulp.start('compile-images')
 }
