@@ -101,7 +101,7 @@ gulp.task('watch-css', () => {
 })
 
 if (process.argv[2] && process.argv[2] === '--watch') {
-  gulp.start('watch-css')
+  gulp.start([ 'compile-css', 'watch-css' ])
 } else {
   gulp.start('compile-css')
 }

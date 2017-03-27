@@ -31,7 +31,7 @@ gulp.task('watch-fonts', () => {
 })
 
 if (process.argv[2] && process.argv[2] === '--watch') {
-  gulp.start('watch-fonts')
+  gulp.start([ 'compile-fonts', 'watch-fonts' ])
 } else {
   gulp.start('compile-fonts')
 }
