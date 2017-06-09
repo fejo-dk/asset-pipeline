@@ -1,19 +1,20 @@
 # An Asset Pipeline
 
-This is an asset pipeline for projects that need the following:
+An asset pipeline is a set of tools that handles your front-end files (JavaScript, CSS, images and fonts) for you. This project does some preprocessing on them:
 
-* ECMAScript 2015: Bundle a file and all modules it imports into a single file, compiling ES2015 to ES5. Minifying the resulting file.
-* SCSS: Compile from SCSS to CSS, minifying the resulting file. Allow to reference fonts and images with cache busting.
-* Fonts: Copy the font files, add a cache buster to the file name.
-* Images: Copy the image files, add a cache buster to the file name.
+* JavaScript files are compiled to a single, minified JavaScript file using its dependency graph. In addition, they are compiled from modern JavaScript (ES2015) to JavaScript that runs in almost all browsers.
+* You write SCSS which is compiled to a single, minified CSS file. In addition, the CSS attributes are prefixed with vendor specific prefixes according to your configuration.
+* Your fonts and images are copied to the right directory.
 
-It creates files with hashes in their names (for cache busting). It creates so called manifest files so that your application can find the files. You can for example use it together with Rails with the [rails_external_asset_pipeline](https://rubygems.org/gems/rails_external_asset_pipeline) gem. You can configure it via your `package.json`.
+In addition, the resulting file names are altered (see the section about [Manifest files and cache busting](#user-content-manifest-files-and-cache-busting)).
 
 It's the core philosophy of this package that you don't need to know what technology is used in the pipeline. Currently it is a mix of Webpack and Gulp, but this could change later. The idea is that it still offers the same commands and understands the same configuration.
 
 ## Manifest Files and Cache Busting
 
-The pipeline will create a so called manifest file for each of the four file types. The manifest file contains the mapping between the artifact name and the path to the file. For example:
+The asset pipeline creates files with hashes in their names (for cache busting). It creates so called manifest files so that your application can find the files. You can for example use it together with Rails with the [rails_external_asset_pipeline](https://rubygems.org/gems/rails_external_asset_pipeline) gem. You can configure it via your `package.json`.
+
+The pipeline will create a manifest file for each of the four file types. The manifest file contains the mapping between the artifact name and the path to the fingerprinted file. For example:
 
 ```json
 {
