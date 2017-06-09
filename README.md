@@ -1,6 +1,6 @@
 # An Asset Pipeline
 
-An asset pipeline is a set of tools that handles your frontend files (JavaScript, CSS, Images and Fonts) for you. This project does some preprocessing on them:
+An asset pipeline is a set of tools that handles your front-end files (JavaScript, CSS, images and fonts) for you. This project does some preprocessing on them:
 
 * JavaScript files are compiled to a single, minified JavaScript file using its dependency graph. In addition, they are compiled from modern JavaScript (ES2015) to JavaScript that runs in almost all browsers.
 * You write SCSS which is compiled to a single, minified CSS file. In addition, the CSS attributes are prefixed with vendor specific prefixes according to your configuration.
@@ -14,7 +14,7 @@ It's the core philosophy of this package that you don't need to know what techno
 
 The asset pipeline creates files with hashes in their names (for cache busting). It creates so called manifest files so that your application can find the files. You can for example use it together with Rails with the [rails_external_asset_pipeline](https://rubygems.org/gems/rails_external_asset_pipeline) gem. You can configure it via your `package.json`.
 
-The pipeline will create a manifest file for each of the four file types. The manifest file contains the mapping between the artifact name and the path to the file. For example:
+The pipeline will create a manifest file for each of the four file types. The manifest file contains the mapping between the artifact name and the path to the fingerprinted file. For example:
 
 ```json
 {
